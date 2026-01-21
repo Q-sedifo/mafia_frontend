@@ -10,7 +10,7 @@ export const authConfig: AuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
 
-      async authorize(credentials) {
+      async authorize(credentials): Promise<User | null> {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
@@ -42,6 +42,7 @@ export const authConfig: AuthOptions = {
           nickname: data.user.nickname,
           avatar: data.user.avatar,
           accessToken: data.accessToken,
+          refreshToken: data.refreshToken
         }
       },
     }),
@@ -59,6 +60,7 @@ export const authConfig: AuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.accessToken = (user as User).accessToken
+        token.refreshToken = (user as User).refreshToken
         token.id = (user as User).id
         token.email = (user as User).email
         token.nickname = (user as User).nickname
@@ -77,6 +79,7 @@ export const authConfig: AuthOptions = {
       };
 
       session.accessToken = token.accessToken as string
+      session.refreshToken = token.refreshToken as string
 
       return session
     },

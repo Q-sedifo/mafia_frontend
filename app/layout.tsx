@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/shared/providers";
 import { authConfig } from "@/config/auth";
 import { getServerSession } from "next-auth";
 import { Header } from "@/widgets/header";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Mafia",
@@ -27,9 +27,10 @@ export default async function RootLayout({
         >
           <Providers session={session}>
             <Header/>
-            <main className="flex-1">
+            <main className="w-full flex flex-1 p-5">
               { children }
             </main>
+            <Toaster/>
           </Providers>
         </body>
     </html>
