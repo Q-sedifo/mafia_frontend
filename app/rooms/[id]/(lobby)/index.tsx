@@ -45,6 +45,8 @@ export const Lobby = ({ roomId }: IProps) => {
 
   const roomPlayers = room.players?.map((p: any) => p.user) || []
 
+  console.log(room)
+
   return (
     <div className="flex-1 w-full overflow-hidden">
       <div className="w-full flex items-center justify-between">
